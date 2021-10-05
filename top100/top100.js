@@ -13,6 +13,10 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+function URLfromImage(image) {
+  return image.Assets[0].Resources[2].URL;
+}
+
 PetiteVue.createApp({
   loading: false,
   loadedFromStorage: false,
@@ -21,9 +25,9 @@ PetiteVue.createApp({
   get imageURL() {
     if (this.image) {
       try {
-        return this.image.Assets[0].Resources[2].URL;
+        return URLfromImage(this.image);
       } catch {
-        console.error("Failed get image URL");
+        console.error("Failed to get image URL");
       }
     }
     return null;
@@ -55,12 +59,12 @@ PetiteVue.createApp({
     if (!this.loadedFromStorage) {
       this.image = images[getRandomInt(0, images.length)];
     }
-    this.preloadNextImage();
+    this.preloadNextImage(images);
   },
   preloadNextImage(images) {
     const nextImg = images[getRandomInt(0, images.length)];
     localStorage.setItem(CONFIG.STORED_IMAGE_KEY, JSON.stringify(nextImg));
     const img = document.createElement("img");
-    img.src = nextImg.Assets[0].Resources[2].URL;
+    img.src = URLfromImage(nextImg);
   },
 }).mount();

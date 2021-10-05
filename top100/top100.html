@@ -4,20 +4,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="top100.css">
+    <script src="petite-vue.iife.js"></script>
     <title>New tab</title>
 </head>
-<body>
+<body v-scope @mounted="initialize">
     <div class="metadata-wrapper">
         <div class="logo-wrapper">
-            <a id="logo-link" href="#" target="_blank">
-                <img id="logo" class="logo">
+            <a id="logo-link" :href="config.BASE_URL" target="_blank">
+                <img :src="config.LOGO_SRC" class="logo">
             </a>
         </div>
-        <div>
-            <a id="title" href="#" target="_blank"></a>
-            <a id="copyright" href="#" target="_blank"></a>
+        <div v-if="image">
+            <a :href="image.ReferenceURL" :alt="image.Title" class="title" target="_blank">
+                {{ image.Title }}
+            </a>
+            <a :href="config.COPYRIGHT_URL" target="_blank">
+                {{ image.Credit }}
+            </a>
         </div>
     </div>
+    <img v-if="imageURL" :src="imageURL" class="the-image"></img>
     <script src="top100.js"></script>
 </body>
 </html>

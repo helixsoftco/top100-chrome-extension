@@ -1,31 +1,11 @@
 const BASE_URL = "https://noirlab.edu/public/";
-const COPYRIGHT_URL = BASE_URL + "copyright/";
-const JSON_FEED = BASE_URL + "images/d2d/?order_by=-priority";
-const XML_FEED = BASE_URL + "images/feed/top100/";
-const LOGO_SRC = "img/noirlab-white.svg";
-const STORED_IMAGE_KEY = "stored_image";
-const logoLinkElement = document.querySelector("#logo-link");
-const logoElement = document.querySelector("#logo");
-const titleElement = document.querySelector("#title");
-const creditElement = document.querySelector("#copyright");
-const className = "imageTop100";
-let loadedFromStorage = false;
-
-function initialize() {
-  logoLinkElement.href = BASE_URL;
-  logoElement.src = LOGO_SRC;
-  creditElement.href = COPYRIGHT_URL;
-  if (localStorage.getItem(STORED_IMAGE_KEY)) {
-    try {
-      const preloadedImage = JSON.parse(localStorage.getItem(STORED_IMAGE_KEY));
-      displayImage(preloadedImage);
-      loadedFromStorage = true;
-    } catch {
-      // The normal process will load an image anyway
-    }
-  }
-  getImagesFromJSON();
-}
+const CONFIG = {
+  BASE_URL: BASE_URL,
+  COPYRIGHT_URL: BASE_URL + "copyright/",
+  JSON_FEED: BASE_URL + "images/d2d/?order_by=-priority",
+  LOGO_SRC: "img/noirlab-white.svg",
+  STORED_IMAGE_KEY: "stored_image",
+};
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -33,40 +13,54 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function createImageFromJSON(image) {
-  const img = document.createElement("img");
-  img.src = image.Assets[0].Resources[2].URL;
-  img.alt = image.Title;
-  img.className = className;
-  titleElement.textContent = image.Title;
-  titleElement.href = image.ReferenceURL;
-  creditElement.textContent = image.Credit;
-  return img;
-}
-
-function displayImage(image) {
-  document.body.appendChild(createImageFromJSON(image));
-}
-
-function onLoadedJSON(images) {
-  let randomInt = getRandomInt(0, 99);
-  if (!loadedFromStorage) {
-    displayImage(images[randomInt]);
-  }
-  // Preload next image
-  randomInt = getRandomInt(0, 99);
-  const nextImg = images[randomInt];
-  localStorage.setItem(STORED_IMAGE_KEY, JSON.stringify(nextImg));
-  createImageFromJSON(nextImg);
-}
-
-function getImagesFromJSON() {
-  fetch(JSON_FEED)
-    .then((res) => res.json())
-    .then((out) => {
-      onLoadedJSON(out.Collections);
-    })
-    .catch((err) => console.error(err));
-}
-
-initialize();
+PetiteVue.createApp({
+  loading: false,
+  loadedFromStorage: false,
+  config: CONFIG,
+  image: null,
+  get imageURL() {
+    if (this.image) {
+      try {
+        return this.image.Assets[0].Resources[2].URL;
+      } catch {
+        console.error("Failed get image URL");
+      }
+    }
+    return null;
+  },
+  initialize() {
+    if (localStorage.getItem(CONFIG.STORED_IMAGE_KEY)) {
+      try {
+        const preloadedImage = JSON.parse(
+          localStorage.getItem(CONFIG.STORED_IMAGE_KEY)
+        );
+        this.image = preloadedImage;
+        this.loadedFromStorage = true;
+      } catch {
+        // The normal process will load an image anyway
+        console.error("Failed to load stored image");
+      }
+    }
+    this.getImagesFromJSON();
+  },
+  getImagesFromJSON() {
+    fetch(CONFIG.JSON_FEED)
+      .then((res) => res.json())
+      .then((out) => {
+        this.onJSONloaded(out.Collections);
+      })
+      .catch((err) => console.error(err));
+  },
+  onJSONloaded(images) {
+    if (!this.loadedFromStorage) {
+      this.image = images[getRandomInt(0, images.length)];
+    }
+    this.preloadNextImage();
+  },
+  preloadNextImage(images) {
+    const nextImg = images[getRandomInt(0, images.length)];
+    localStorage.setItem(CONFIG.STORED_IMAGE_KEY, JSON.stringify(nextImg));
+    const img = document.createElement("img");
+    img.src = nextImg.Assets[0].Resources[2].URL;
+  },
+}).mount();

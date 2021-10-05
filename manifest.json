@@ -1,27 +1,27 @@
 {
-    "manifest_version": 3,
-    "name": "ESA/Hubble Top 100 Images",
-    "description": "Enjoy the beautiful images from the ESA/Hubble Space Telescope Top 100 images collection.",
-    "version": "1.1.2",
-    "icons": {
-        "32": "icons/ESA-Hubble32.png",
-        "64": "icons/ESA-Hubble64.png",
-        "128": "icons/ESA-Hubble128.png"
+  "manifest_version": 3,
+  "name": "ESA/Hubble Top 100 Images",
+  "description": "Enjoy the beautiful images from the ESA/Hubble Space Telescope Top 100 images collection.",
+  "version": "1.1.2",
+  "icons": {
+    "32": "icons/ESA-Hubble32.png",
+    "64": "icons/ESA-Hubble64.png",
+    "128": "icons/ESA-Hubble128.png"
+  },
+  "action": {
+    "default_icon": {
+      "32": "icons/ESA-Hubble32.png",
+      "64": "icons/ESA-Hubble64.png",
+      "128": "icons/ESA-Hubble128.png"
     },
-    "action": {
-        "default_icon": {
-            "32": "icons/ESA-Hubble32.png",
-            "64": "icons/ESA-Hubble64.png",
-            "128": "icons/ESA-Hubble128.png"
-        },
-        "default_title": "ESA/Hubble Top 100 Images",
-        "default_popup": "top100/popup.html"
-    },
-    "chrome_url_overrides" : {
-        "newtab": "top100/top100.html"
-    },
-    "host_permissions": [
-        "https://esahubble.org/images/feed/top100/",
-        "https://esahubble.org/images/archive/top100/d2d/"
-    ]
+    "default_title": "ESA/Hubble Top 100 Images",
+    "default_popup": "top100/popup.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "top100/index.html"
+  },
+  "host_permissions": [
+    "https://esahubble.org/images/feed/top100/",
+    "https://esahubble.org/images/archive/top100/d2d/"
+  ]
 }

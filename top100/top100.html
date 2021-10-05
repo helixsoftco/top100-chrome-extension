@@ -8,6 +8,9 @@
     <title>New tab</title>
 </head>
 <body v-scope @mounted="initialize">
+    <div v-if="loading" class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
     <div class="metadata-wrapper">
         <div class="logo-wrapper">
             <a id="logo-link" :href="config.BASE_URL" target="_blank">

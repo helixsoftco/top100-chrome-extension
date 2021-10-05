@@ -44,6 +44,8 @@ PetiteVue.createApp({
         // The normal process will load an image anyway
         console.error("Failed to load stored image");
       }
+    } else {
+      this.loading = true;
     }
     this.getImagesFromJSON();
   },
@@ -53,7 +55,10 @@ PetiteVue.createApp({
       .then((out) => {
         this.onJSONloaded(out.Collections);
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => {
+        this.loading = false;
+      });
   },
   onJSONloaded(images) {
     if (!this.loadedFromStorage) {

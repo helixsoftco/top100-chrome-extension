@@ -20,6 +20,7 @@
   "chrome_url_overrides": {
     "newtab": "top100/index.html"
   },
+  "permissions": ["storage"],
   "host_permissions": [
     "https://esahubble.org/images/feed/top100/",
     "https://esahubble.org/images/archive/top100/d2d/"

@@ -1,28 +1,26 @@
 {
   "manifest_version": 3,
-  "name": "ESA/Hubble Top 100 Images",
-  "description": "Enjoy the beautiful images from the ESA/Hubble Space Telescope Top 100 images collection.",
+  "name": "NOIRLab Top 100 Images",
+  "description": "Enjoy the beautiful images from the NOIRLab Top 100 images collection.",
   "version": "1.1.2",
   "icons": {
-    "32": "icons/ESA-Hubble32.png",
-    "64": "icons/ESA-Hubble64.png",
-    "128": "icons/ESA-Hubble128.png"
+    "32": "icons/icon-32x32.png",
+    "64": "icons/icon-64x64.png",
+    "128": "icons/icon-128x128.png"
   },
   "action": {
     "default_icon": {
-      "32": "icons/ESA-Hubble32.png",
-      "64": "icons/ESA-Hubble64.png",
-      "128": "icons/ESA-Hubble128.png"
+      "32": "icons/icon-32x32.png",
+      "64": "icons/icon-64x64.png",
+      "128": "icons/icon-128x128.png"
     },
-    "default_title": "ESA/Hubble Top 100 Images",
-    "default_popup": "top100/popup.html"
+    "default_title": "NOIRLab Top 100 Images"
   },
   "chrome_url_overrides": {
     "newtab": "top100/index.html"
   },
   "permissions": ["storage"],
   "host_permissions": [
-    "https://esahubble.org/images/feed/top100/",
-    "https://esahubble.org/images/archive/top100/d2d/"
+    "https://noirlab.edu/public/"
   ]
 }

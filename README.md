@@ -1,6 +1,6 @@
-# ESA/Hubble Top 100 Images Chrome extension
+# NOIRLab Top 100 Images Chrome extension
 
-This extension takes a random image from our collection of 100 best images
+This extension takes a random image from NOIRLab's collection of 100 best images
 and renders it when the user opens a new browser tab. In the lower left corner
 the logo of our official site is displayed next to the title and image credit.
 
@@ -10,17 +10,16 @@ the logo of our official site is displayed next to the title and image credit.
 • manifest.json
 • README.md
 + icons/
-    • ESA-Hubble128.png
-    • ESA-Hubble32.png
-    • ESA-Hubble64.png
+    • icon-32x32.png
+    • icon-64x64.png
+    • icon-128x128.png
 + top100/
     • top100.css
     • top100.html
     • top100.js
-    • xmlToJSON.js
+    • vue3.0.2.runtime.global.prod.js
     + img/
-        • logo.png
-        • popup.jpg
+        • noirlab-white.svg
 ```
 
 ## Development ##
@@ -29,25 +28,25 @@ the logo of our official site is displayed next to the title and image credit.
 
 Every extension has a JSON-formatted [**manifest**](https://developer.chrome.com/docs/extensions/mv3/manifest/)
 file, named manifest.json, that provides important information. Using
-[manifest.json](manifest.json), you specify basic metadata about your extension
-such as the name and version, and can also specify aspects of your
+[manifest.json](manifest.json), you can specify basic metadata about your extension
+such as the name and version, and you can also define aspects of your
 extension's functionality (such as background scripts, content scripts, and browser actions).
 
 > We strongly recommend you check this [link](https://developer.chrome.com/docs/extensions/mv3/devguide/)
 
 ### How to get this repository ###
 
-Clone the repository, and update your origin url: 
+Clone the repository
 ```
-git clone https://github.com/encisosystems/top100-chrome-extension
+git clone https://github.com/helixsoftco/top100-chrome-extension
 ```
 
 ### Main feature ###
 
-Our [extension](https://chrome.google.com/webstore/detail/esahubble-top-100-images/nkhniebockeoppojmcbcgphpmpdladgo) 
+This chrome extension 
 modifies the new tab of the Google Chrome browser to render an image from the 
-Top 100 collection from the ESA/Hubble [site](https://esahubble.org/). The images 
-are obtained with a query to an API that provides the information in XML format 
+Top 100 collection from the NOIRLab [website](https://noirlab.edu/public/es/images/archive/top100/). The images 
+are obtained with a query to an API that provides the information in JSON (AVM) format 
 from which the image title and the url of the resource are extracted.
 
 ### Unpacked extension ###

@@ -73,7 +73,7 @@ Vue.createApp({
                 class: "title",
                 target: "_blank",
               },
-              this.image.Title
+              this.sanitizeString(this.image.Title)
             ),
             h(
               "a",
@@ -81,7 +81,7 @@ Vue.createApp({
                 href: this.config.COPYRIGHT_URL,
                 target: "_blank",
               },
-              this.image.Credit
+              this.sanitizeString(this.image.Credit)
             ),
           ]),
       ]),
@@ -138,6 +138,15 @@ Vue.createApp({
         .finally(() => {
           this.loading = false;
         });
+    },
+    sanitizeString(str){
+      str = str.replaceAll('&amp;', '&')
+      .replaceAll('&lt;', '<')
+      .replaceAll('&gt;', '>')
+      .replaceAll('&quot;', '"')
+      .replaceAll('&apos;', "'")
+      .replaceAll('&#039;', "'")
+      return str.trim();
     },
     onJSONloaded(images) {
       if (!this.loadedFromStorage) {

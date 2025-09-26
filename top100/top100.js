@@ -14,7 +14,7 @@ function getRandomInt(min, max) {
 }
 
 function URLfromImage(image) {
-  const resources = image.Assets[0].Resources;
+  const resources = image.Assets.length > 0 ? image.Assets[0].Resources : [];
   const mediumResource = resources.find(r => r.ResourceType === "Medium");
   if (mediumResource && mediumResource.URL) {
     return mediumResource.URL;

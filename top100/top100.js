@@ -14,7 +14,13 @@ function getRandomInt(min, max) {
 }
 
 function URLfromImage(image) {
-  return image.Assets[0].Resources[2].URL;
+  const resources = image.Assets[0].Resources;
+  const mediumResource = resources.find(r => r.ResourceType === "Medium");
+  if (mediumResource && mediumResource.URL) {
+    return mediumResource.URL;
+  }
+  // Fallback to the second element if "Medium" not found
+  return resources[2] && resources[2].URL ? resources[2].URL : null;
 }
 
 // Abstraction of storage to use chrome storage when installed as extension

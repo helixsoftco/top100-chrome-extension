@@ -41,6 +41,34 @@ Clone the repository
 git clone https://github.com/helixsoftco/top100-chrome-extension
 ```
 
+### How to contribute to this repository ###
+
+When contributing to this repository, developers must temporarily replace the local Vue.js reference in the file [`top100/index.html`](top100/index.html) with the CDN version of Vue.js.
+
+This change is required **for development purposes only** and is done to help avoid potential issues related to **RHC (Remote Host Code)**, such as restrictions or security policies.
+
+#### Instructions
+
+Replace the following line in [`top100/index.html`](top100/index.html):
+
+```html
+<script src="vue3.0.2.runtime.global.prod.js"></script>
+```
+
+with this line:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.runtime.global.js"></script>
+```
+
+You may also keep the CDN version commented for quick switching during development:
+
+```html
+<!-- Use this Vue version for development only -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue@3.0.2/dist/vue.runtime.global.js"></script> -->
+```
+> **Before committing or creating a pull request, make sure to restore the original local reference**.
+
 ### Main feature ###
 
 This chrome extension 

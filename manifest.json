@@ -20,7 +20,14 @@
     "newtab": "top100/index.html"
   },
   "permissions": ["storage"],
-  "host_permissions": [
-    "https://noirlab.edu/public/"
-  ]
+  "host_permissions": ["https://noirlab.edu/public/"],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "@noirlab-top100-images",
+      "data_collection_permissions": {
+        "required": ["none"]
+      },
+      "strict_min_version": "109.0"
+    }
+  }
 }
